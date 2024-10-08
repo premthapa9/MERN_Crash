@@ -9,7 +9,7 @@ const Home = () => {
   useEffect(() => {
     getProduct();
   }, [getProduct]);
-  console.log(products);
+
   return (
     <div className="border-x-0 md:border-x-2 p-3 pt-5">
       <div>

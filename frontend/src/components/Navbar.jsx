@@ -10,7 +10,7 @@ import { useProductStore } from "../store/product";
 const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
   const { products } = useProductStore();
-  console.log(products);
+  // console.log("navbar", products);
   return (
     <div
       className={`border-x-0 md:border-x-2 p-3  shadow-md ${

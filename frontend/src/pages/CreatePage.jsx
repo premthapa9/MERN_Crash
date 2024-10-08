@@ -8,7 +8,7 @@ const CreatePage = () => {
     image: "",
   });
   const { products, createProduct } = useProductStore();
-  console.log(products);
+  console.log("create page", products);
   const handleChange = (e) => {
     const { name, value } = e.target;
 
