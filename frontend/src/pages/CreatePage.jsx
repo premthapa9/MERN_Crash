@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useProductStore } from "../store/product";
 
 const CreatePage = () => {
   const [data, setData] = useState({
@@ -6,7 +7,8 @@ const CreatePage = () => {
     price: "",
     image: "",
   });
-
+  const { products, createProduct } = useProductStore();
+  console.log(products);
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -14,12 +16,21 @@ const CreatePage = () => {
       return { ...prev, [name]: value };
     });
   };
-  const handleSub = (e) => {
+  const handleSub = async (e) => {
     e.preventDefault();
     if (!data.name || !data.price || !data.image) {
       console.log("All field are mandatory");
     } else {
-      console.log("We are good to go buddy");
+      // console.log(data);
+      // console.log("We are good to go buddy");
+      const { success, message } = await createProduct(data);
+      console.log("Success:", success);
+      console.log("Message:", message);
+      setData({
+        name: "",
+        price: "",
+        image: "",
+      });
     }
   };
 

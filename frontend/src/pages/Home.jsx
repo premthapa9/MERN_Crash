@@ -1,8 +1,15 @@
-import React from "react";
-import { products } from "../data/data";
+import React, { useEffect, useState } from "react";
+// import { products } from "../data/data";
 import Card from "../components/Card";
+import { useProductStore } from "../store/product";
 
 const Home = () => {
+  const { products, getProduct } = useProductStore();
+
+  useEffect(() => {
+    getProduct();
+  }, [getProduct]);
+  console.log(products);
   return (
     <div className="border-x-0 md:border-x-2 p-3 pt-5">
       <div>
@@ -10,8 +17,8 @@ const Home = () => {
           Current Product
         </h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
-          {products.length > 0 ? (
-            products.map((prod, el) => <Card key={prod.id} {...prod} />)
+          {products?.length > 0 ? (
+            products?.map((prod, el) => <Card key={prod._id} {...prod} />)
           ) : (
             <h1>Product Not Found</h1>
           )}

@@ -1,14 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import { FaPlus } from "react-icons/fa";
 import { MdOutlineLightMode } from "react-icons/md";
 import { MdModeNight } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { MdOutlineLocalGroceryStore } from "react-icons/md";
+import useTheme from "../hooks/useTheme";
+import { useProductStore } from "../store/product";
 
 const Navbar = () => {
-  const [flag, setFlag] = useState(true);
+  const { theme, toggleTheme } = useTheme();
+  const { products } = useProductStore();
+  console.log(products);
   return (
-    <div className="border-x-0 md:border-x-2 p-3  shadow-md ">
+    <div
+      className={`border-x-0 md:border-x-2 p-3  shadow-md ${
+        theme === "dark" ? "bg-black" : "bg-white"
+      }`}
+    >
       <div className=" flex justify-between items-center  gap-2 ">
         <Link
           to="/"
@@ -21,10 +29,10 @@ const Navbar = () => {
             <FaPlus color="white" />
           </Link>
           <button
-            onClick={() => setFlag(!flag)}
+            onClick={toggleTheme}
             className="px-2 py-2 bg-gray-500 rounded-sm text-white"
           >
-            {flag ? <MdModeNight /> : <MdOutlineLightMode />}
+            {theme === "light" ? <MdModeNight /> : <MdOutlineLightMode />}
           </button>
         </div>
       </div>
